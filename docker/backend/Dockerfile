@@ -21,6 +21,10 @@ EXPOSE 8088
 ENV DB_URL=jdbc:postgresql://postgres-sql-bsn:5432/book_social_network
 ENV JAR_VERSION=${APP_VERSION}
 ENV ACTIVE_PROFILE=${PROFILE}
+ENV EMAIL_HOSTNAME=missing_host_name
+ENV EMAIL_USER_NAME=missing_user_name
+ENV EMAIL_PASSWORD=missing_password
+
 
 # Healthcheck via Spring Actuator (bonne pratique observabilité)
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
