@@ -83,8 +83,7 @@ jobs:
       - name: Extract project version
         id: extract_version
         run: |
-          VERSION=$(mvn -f book-network/pom.xml -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
       
       - name: Login to DockerHub
         uses: docker/login-action@v3
