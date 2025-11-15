@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.AuditorAware;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,11 +17,6 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.springframework.http.HttpHeaders.ACCEPT;
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
-import static org.springframework.http.HttpHeaders.ORIGIN;
 
 @Configuration
 @RequiredArgsConstructor
@@ -53,7 +46,7 @@ public class BeansConfig {
     }
 
     @Bean
-    public AuditorAware<Integer> auditorAware() {
+    public ApplicationAuditAware auditorAware() {
         return new ApplicationAuditAware();
     }
 
