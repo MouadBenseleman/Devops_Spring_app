@@ -12,7 +12,7 @@ on:
 
 jobs:
   compile:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     name: compile project
     steps:
       - name: Checkout code
@@ -20,40 +20,36 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: setup JDK
-        uses: actions/setup-jdk@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
           java-version: 17
           distribution: 'corretto'
 
-      - name: compile project
+      - name: Compile project
         run: |
           cd book-network
           ./mvnw clean compile
 
-  unit-tests:
-    runs-on: ubuntu-latest
-    name: Unit Tests
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    unit-tests:
+      runs-on: self-hosted
+      name: Unit Tests
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
 
-      - name: setup JDK
-        uses: actions/setup-jdk@v4
-        with:
-          java-version: 17
-          distribution: 'corretto'
+        - name: Setup Java
+          uses: actions/setup-java@v4
+          with:
+            java-version: 17
+            distribution: 'corretto'
 
-      - name: Running Unit Tests
-        run: |
-          cd book-network
-          ./mvnw clean test
-
-
-
-
+        - name: Running Unit Tests
+          run: |
+            cd book-network
+            ./mvnw clean test
   build:
     name: Building Project
     runs-on: self-hosted
