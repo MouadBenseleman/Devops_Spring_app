@@ -12,7 +12,7 @@ on:
 
 jobs:
   compile:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: compile project
     steps:
       - name: Checkout code
@@ -30,15 +30,9 @@ jobs:
         run: |
           cd book-network
           ./mvnw clean compile
-          
-
-
-
-
-  
 
   unit-tests:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Unit Tests
     steps:
       - name: Checkout code
@@ -56,10 +50,6 @@ jobs:
         run: |
           cd book-network
           ./mvnw clean test
-
-
-
-
 
 
 
