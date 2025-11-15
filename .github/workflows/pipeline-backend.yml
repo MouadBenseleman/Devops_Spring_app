@@ -90,6 +90,17 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Extract Maven Version
+        id: extract_version
+        run: |
+          cd book-network
+          VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)
+          if [ -z "$VERSION" ]; then
+            VERSION="latest"
+          fi
+          echo "VERSION=$VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Build & Push to DockerHub
         uses: docker/build-push-action@v5
         with:
@@ -102,7 +113,6 @@ jobs:
             PROFILE=dev
             APP_VERSION=${{ steps.extract_version.outputs.VERSION }}
   
-
   deploy:
     name: Deploy Backend
     runs-on: ubuntu-latest
